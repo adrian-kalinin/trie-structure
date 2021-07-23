@@ -74,3 +74,16 @@ class Trie:
         self._dfs(node, prefix[:-1], words)
 
         return words
+
+    @classmethod
+    def from_words(cls, words):
+        """
+        Returns Trie with given words.
+        """
+
+        _trie = cls()
+
+        for word in words:
+            _trie.insert(word)
+
+        return _trie
