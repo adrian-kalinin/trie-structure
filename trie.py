@@ -14,7 +14,7 @@ class Trie:
 
     def insert(self, word):
         """
-        Creates nodes which represent a word if it does not exist.
+        Creates nodes that represent a word if it does not exist.
         """
 
         node = self._root
@@ -32,7 +32,7 @@ class Trie:
 
     def find(self, word):
         """
-        Checks if a word exists in Trie or not.
+        Returns boolean result that depends on existence of given word.
         """
 
         node = self._root
@@ -44,3 +44,33 @@ class Trie:
             node = node.children[character]
 
         return True
+
+    def _dfs(self, node, prefix, words):
+        """
+        Depth-first traversal
+        """
+
+        if node.is_end:
+            words.append(prefix + node.value)
+
+        for child in node.children.values():
+            self._dfs(child, prefix + node.value, words)
+
+    def search(self, prefix):
+        """
+        Returns a list of words that start with given prefix.
+        """
+
+        node = self._root
+        words = []
+
+        for character in prefix:
+            if character in node.children:
+                node = node.children[character]
+
+            else:
+                return words
+
+        self._dfs(node, prefix[:-1], words)
+
+        return words
