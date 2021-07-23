@@ -47,7 +47,7 @@ class Trie:
 
     def _dfs(self, node, prefix, words):
         """
-        Depth-first traversal
+        Depth-first traversal to find complete words.
         """
 
         if node.is_end:
