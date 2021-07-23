@@ -10,10 +10,14 @@ class Node:
 
 class Trie:
     def __init__(self):
-        self.root = Node()
+        self._root = Node()
 
     def insert(self, word):
-        node = self.root
+        """
+        Creates nodes which represent a word if it does not exist.
+        """
+
+        node = self._root
 
         for character in word:
             if character in node.children:
@@ -26,5 +30,17 @@ class Trie:
 
         node.is_end = True
 
-    def search(self):
-        pass
+    def find(self, word):
+        """
+        Checks if a word exists in Trie or not.
+        """
+
+        node = self._root
+
+        for character in word:
+            if character not in node.children:
+                return False
+
+            node = node.children[character]
+
+        return True
